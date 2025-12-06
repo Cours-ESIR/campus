@@ -1,8 +1,8 @@
 <script lang="ts">
 	import "maplibre-gl/dist/maplibre-gl.css";
 	import maplibregl from "maplibre-gl";
-
 	import { onMount } from "svelte";
+	import SearchBar from "$lib/SearchBar.svelte";
 
 	function changelayer(event, map) {
 		if (event.matches) {
@@ -14,11 +14,13 @@
 		}
 	}
 
-	onMount(async () => {
-		let geojson = await import("$lib/../includes/geojson.json");
-		let def = await import("$lib/../includes/search.ts");
+	let { data } = $props();
+	let { geojson } = data;
 
-		const map = new maplibregl.Map({
+	let map = $state();
+
+	onMount(async () => {
+		map = new maplibregl.Map({
 			container: "map",
 			projection: "mercator",
 			style: {
@@ -80,9 +82,6 @@
 		});
 
 		map.addControl(new maplibregl.FullscreenControl(), "bottom-right");
-
-		let ctrl = new def.default(geojson);
-		map.addControl(ctrl, "top-left");
 
 		map.on("idle", () => {
 			let query = window.matchMedia("(prefers-color-scheme: dark)");
@@ -156,6 +155,7 @@
 	});
 </script>
 
-<div class="w-full h-full relative">
+<div class="w-full h-full relative text-slate-50">
+	<SearchBar {map} {geojson}></SearchBar>
 	<div id="map" class="w-full h-full absolute"></div>
 </div>

@@ -40,14 +40,14 @@ class Salles {
                     }
                 }
                 Salles.data = ndata
-            }
+            } catch { }
 
 
         }
         return Salles.data
     }
 
-    async getByKey(key: string): Promise<{ cal: Event[]; id: string; }> {
+    async getByKey(key: string): Promise<{ events: Event[]; id: string; }> {
         let cal = await this.getCal()
         let path = JSON.parse(atob(key))
         return cal[path[0]][path[1]][path[2]]
