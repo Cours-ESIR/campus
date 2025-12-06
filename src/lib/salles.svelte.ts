@@ -1,4 +1,5 @@
 import { data, sallesEvents, type Event } from "@cours-esir/salles_module"
+import { PromisePool } from '@supercharge/promise-pool'
 
 function getMonday(d: Date) {
     d = new Date(d);
@@ -15,6 +16,12 @@ class Salles {
 
     static data: dataType = {}
 
+    static setDataFromPath(p1: string, p2: string, p3: string, n: { events: Event[], id: string }) {
+        if (Salles.data[p1] === undefined) { Salles.data[p1] = {} }
+        if (Salles.data[p1][p2] === undefined) { Salles.data[p1][p2] = {} }
+        Salles.data[p1][p2][p3] = n
+    }
+
     async getCal() {
         let date = new Date()
 
@@ -24,25 +31,32 @@ class Salles {
             let dateE = new Date()
             dateE.setDate(dateS.getDate() + 14)
 
-            try {
-                let ndata: dataType = {}
-                for (let university of data) {
-                    ndata[university.name] = {}
-                    for (let building of university.buildings) {
-                        ndata[university.name][building.name] = {}
-                        for (let room of building.rooms) {
-                            let events = await sallesEvents(university.rootURL, [room.resourceId], "1", dateS, dateE)
-                            let id = btoa(JSON.stringify([university.name, building.name, room.name]))
-                            ndata[university.name][building.name][room.name] = {
-                                events, id
-                            }
-                        }
+            let promises: { id: string, rootURL: string, resourceId: string, projectId: string }[] = []
+
+            for (let university of data) {
+                for (let building of university.buildings) {
+                    for (let room of building.rooms) {
+                        let id = btoa(JSON.stringify([university.name, building.name, room.name]))
+                        promises.push({ id, rootURL: university.rootURL, resourceId: room.resourceId, projectId: room.projectId })
                     }
                 }
-                Salles.data = ndata
-            } catch { }
+            }
 
-
+            await PromisePool.withConcurrency(10).for(promises).process(async el => {
+                for (let i = 0; i < 5; i++) {
+                    try {
+                        let events = await sallesEvents(el.rootURL, [el.resourceId], el.projectId, dateS, dateE)
+                        let path = JSON.parse(atob(el.id))
+                        Salles.setDataFromPath(path[0], path[1], path[2], {
+                            events, id: el.id
+                        })
+                        return
+                    } catch (error) {
+                        console.error("Could not load", atob(el.id), "try", i)
+                    }
+                }
+                console.error("Could not load", atob(el.id))
+            })
         }
         return Salles.data
     }
