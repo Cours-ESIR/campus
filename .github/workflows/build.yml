@@ -35,6 +35,7 @@ jobs:
 
       - run: bun run build
         env:
+          nodeenv: true
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 
