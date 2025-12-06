@@ -1,4 +1,4 @@
-import { data, sallesEvents } from "@cours-esir/salles_module"
+import { data, sallesEvents, type Event } from "@cours-esir/salles_module"
 
 function getMonday(d: Date) {
     d = new Date(d);
@@ -11,7 +11,7 @@ class Salles {
 
     static update = new Date(0)
 
-    static data: { [university: string]: { [building: string]: { [room: string]: { cal: IcsCalendar, id: string } } } } = {}
+    static data: { [university: string]: { [building: string]: { [room: string]: { events: Event[], id: string } } } } = {}
 
     async getCal() {
         let date = new Date()
@@ -27,10 +27,10 @@ class Salles {
                 for (let building of university.buildings) {
                     Salles.data[university.name][building.name] = {}
                     for (let room of building.rooms) {
-                        let cal = await sallesEvents(university.rootURL, [room.resourceId], "1", dateS, dateE)
+                        let events = await sallesEvents(university.rootURL, [room.resourceId], "1", dateS, dateE)
                         let id = btoa(JSON.stringify([university.name, building.name, room.name]))
                         Salles.data[university.name][building.name][room.name] = {
-                            cal, id
+                            events, id
                         }
                     }
                 }
@@ -40,10 +40,10 @@ class Salles {
         return Salles.data
     }
 
-    async getByKey(key: string): { cal: IcsCalendar, id: string } {
+    async getByKey(key: string): Promise<{ cal: Event[]; id: string; }> {
         let cal = await this.getCal()
         let path = JSON.parse(atob(key))
-        return  cal[path[0]][path[1]][path[2]]
+        return cal[path[0]][path[1]][path[2]]
     }
 }
 

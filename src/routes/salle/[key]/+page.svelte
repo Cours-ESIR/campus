@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+	import type { Event } from "@cours-esir/salles_module";
 	import { onMount } from "svelte";
 
 	let jours = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"];
@@ -7,9 +8,9 @@
 	let { data } = $props();
 	let { planning } = data;
 
-	let days: { [day: string]: [Date, Date, string][] } = {};
+	let days: { [day: string]: Event[] } = {};
 
-	for (let event of planning.cal.events) {
+	for (let event of planning.events) {
 		let key = `${event.start.date.getDate().toString().padStart(2, "0")}/${(event.start.date.getMonth() + 1).toString().padStart(2, "0")}/${event.start.date.getFullYear()}`;
 		if (days[key] === undefined) {
 			days[key] = [];

@@ -5,8 +5,7 @@
 	export let salle: String;
 	export let salleInfo;
     export let date : Date
-
-    let { until, state, error } = salleLibres(salleInfo.cal, date)
+    let { until, state, error } = salleLibres(salleInfo.events, date)
 
 	function stringify_date(date: Date) {
 		if (date == undefined) return "updating";
