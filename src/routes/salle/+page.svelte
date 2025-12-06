@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-    import { salleEvents,salleLibres,getSalles } from "salles_module";
   import { onMount } from "svelte";
 
 
