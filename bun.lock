@@ -4,13 +4,11 @@
   "workspaces": {
     "": {
       "name": "univ",
-      "dependencies": {
+      "devDependencies": {
+        "@cours-esir/salles_module": "3.0.3",
         "@steeze-ui/phosphor-icons": "^2.1.1",
         "@steeze-ui/simple-icons": "^1.10.1",
         "@steeze-ui/svelte-icon": "^1.6.2",
-      },
-      "devDependencies": {
-        "@cours-esir/salles_module": "3.0.2",
         "@sveltejs/adapter-vercel": "^6.2.0",
         "@sveltejs/kit": "^2.49.1",
         "@sveltejs/vite-plugin-svelte": "^6.2.1",
@@ -24,7 +22,7 @@
     },
   },
   "packages": {
-    "@cours-esir/salles_module": ["@cours-esir/salles_module@3.0.2", "https://npm.pkg.github.com/download/@cours-esir/salles_module/3.0.2/b9a5e41f976ba41a72f48d6cdba644ad563da100", { "dependencies": { "express": "^5.2.1", "ts-ics": "^2.4.0", "typescript": "^5.9.3" } }, "sha512-DNKd2goUmfsdlJ8+UbAHKbR7I/MX/wcvPzE/4Pa6pdmwh04I0jCUEnXrrezJnzEzKLPBFaVV9eVU9vC/gZ1qfA=="],
+    "@cours-esir/salles_module": ["@cours-esir/salles_module@3.0.3", "https://npm.pkg.github.com/download/@cours-esir/salles_module/3.0.3/d74fef2e68fe30c15f09e01aef3c7da64970e056", { "dependencies": { "express": "^5.2.1", "ts-ics": "^2.4.0", "typescript": "^5.9.3" } }, "sha512-fBciULxGvdMtTu/REIpFwTzVDDOh+f97vidwTQdlw18N36C+Yax5ZDHTN2S1u8FEKtwXGn3qgD30NOQnLhK35A=="],
 
     "@cspotcode/source-map-support": ["@cspotcode/source-map-support@0.8.1", "", { "dependencies": { "@jridgewell/trace-mapping": "0.3.9" } }, "sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw=="],
 
