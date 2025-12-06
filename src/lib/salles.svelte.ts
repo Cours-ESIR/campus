@@ -7,11 +7,13 @@ function getMonday(d: Date) {
     return new Date(d.setDate(diff));
 }
 
+type dataType = { [university: string]: { [building: string]: { [room: string]: { events: Event[], id: string } } } }
+
 class Salles {
 
     static update = new Date(0)
 
-    static data: { [university: string]: { [building: string]: { [room: string]: { events: Event[], id: string } } } } = {}
+    static data: dataType = {}
 
     async getCal() {
         let date = new Date()
@@ -22,19 +24,24 @@ class Salles {
             let dateE = new Date()
             dateE.setDate(dateS.getDate() + 14)
 
-            for (let university of data) {
-                Salles.data[university.name] = {}
-                for (let building of university.buildings) {
-                    Salles.data[university.name][building.name] = {}
-                    for (let room of building.rooms) {
-                        let events = await sallesEvents(university.rootURL, [room.resourceId], "1", dateS, dateE)
-                        let id = btoa(JSON.stringify([university.name, building.name, room.name]))
-                        Salles.data[university.name][building.name][room.name] = {
-                            events, id
+            try {
+                let ndata: dataType = {}
+                for (let university of data) {
+                    ndata[university.name] = {}
+                    for (let building of university.buildings) {
+                        ndata[university.name][building.name] = {}
+                        for (let room of building.rooms) {
+                            let events = await sallesEvents(university.rootURL, [room.resourceId], "1", dateS, dateE)
+                            let id = btoa(JSON.stringify([university.name, building.name, room.name]))
+                            ndata[university.name][building.name][room.name] = {
+                                events, id
+                            }
                         }
                     }
                 }
+                Salles.data = ndata
             }
+
 
         }
         return Salles.data
