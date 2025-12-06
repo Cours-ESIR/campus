@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { onMount } from "svelte";
 	import SalleCard from "$lib/SalleCard.svelte";
 	import Icons from "$lib/Icons.svelte";
 
 	let { data } = $props();
+  let date = new Date()
 </script>
 
 <div class="container">
@@ -19,11 +19,11 @@
 					><Icons name="eye" width="24"></Icons></button
 				> -->
 			</div>
-			{#each Object.entries(salles) as [salle, state]}
+			{#each Object.entries(salles) as [salle, salleInfo]}
 				<SalleCard
 					{salle}
-					{batiment}
-					{state}
+					{salleInfo}
+          {date}
 				></SalleCard>
 			{/each}
 		{/each}

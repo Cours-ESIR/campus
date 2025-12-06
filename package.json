@@ -18,9 +18,10 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@cours-esir/salles_module": "3.0.0",
 		"hammerjs": "^2.0.8",
 		"maplibre-gl": "^5.14.0",
-		"vite": "^7.2.6",
-		"@cours-esir/salles_module": "3.0.0"
+		"vercel": "^49.1.1",
+		"vite": "^7.2.6"
 	}
 }

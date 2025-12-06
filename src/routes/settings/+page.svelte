@@ -1,14 +1,11 @@
 <script lang="ts">
 
     import Card from "$lib/Card.svelte";
-    import Form from "./Form.svelte";
 
 </script>
 
 <div class="container">
     <header>Informations</header>
-
-    <Form></Form>
 
     <Card title="Liste des librairies utilisées">
         <ul>

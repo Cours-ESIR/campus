@@ -4,7 +4,6 @@
 
 <footer>
 	<a class="iconbtn" href="/"><Icons width="24" name="home"/></a>
-	<a class="iconbtn" href="/agenda"><Icons width="24" name="note"/></a>
 	<a class="iconbtn" href="/map"><Icons width="24" name="map"/></a>
 	<a class="iconbtn" href="/settings"><Icons width="24" name="info"/></a>
 	<a class="iconbtn" target="_blank" href="https://github.com/beaulieu-camp"><Icons width="24" name="github"/></a>

@@ -1,21 +1,12 @@
 <script lang="ts">
+	import { salleLibres } from "@cours-esir/salles_module";
 	import Icons from "./Icons.svelte";
 
-	export let batiment: String;
 	export let salle: String;
-	export let state;
+	export let salleInfo;
+    export let date : Date
 
-	let { until, state:status, error } = state;
-
-	function uri(batiment: String, salle: String) {
-		return "";
-		return (
-			"salle#" +
-			batiment.replaceAll(" ", "_") +
-			"_" +
-			salle.replaceAll(" ", "_")
-		);
-	}
+    let { until, state, error } = salleLibres(salleInfo.cal, date)
 
 	function stringify_date(date: Date) {
 		if (date == undefined) return "updating";
@@ -23,7 +14,7 @@
 	}
 </script>
 
-<a href={uri(batiment, salle)}>
+<a href="/salle/{salleInfo.id}">
 	{#if error}
 		<div>
 			<p>🔴 {error}</p>
@@ -36,11 +27,11 @@
 		<div>
 			<p>
 				<Icons
-					color={status == "Libre" ? "var(--green)" : "var(--red)"}
+					color={state == "Libre" ? "var(--green)" : "var(--red)"}
 					name="circle"
 					width="16"
 				></Icons>
-				{status}
+				{state}
 			</p>
 			<h3>{salle}</h3>
 
