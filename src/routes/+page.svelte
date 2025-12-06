@@ -1,47 +1,25 @@
 <script lang="ts">
+	import Header from "$lib/Header.svelte";
 	import SalleCard from "$lib/SalleCard.svelte";
-	import Icons from "$lib/Icons.svelte";
-
 	let { data } = $props();
-  let date = new Date()
+	let date = $state(new Date());
+
+	setInterval(() => {
+		date = new Date();
+	}, 1000 * 60);
 </script>
 
-<div class="container">
-	<header>Salles Libres</header>
+<div class="p-4 items-center flex flex-col gap-8 h-full *:w-full *:max-w-xl">
+	<Header>Salles Libres</Header>
 
 	{#each Object.entries(data.retour) as [university, batiments]}
 		{#each Object.entries(batiments) as [batiment, salles]}
-			<div style="display:flex;align-items:center;gap:16px;">
-				<h2>Salles du {batiment}</h2>
-				<!-- <button
-					on:click={() => (batiment.setShow = !batiment.getShow)}
-					style="all:unset;display:grid;place-items:center;"
-					><Icons name="eye" width="24"></Icons></button
-				> -->
+			<div class="flex flex-col gap-4">
+				<h2 class="text-2xl font-bold">Salles du {batiment}</h2>
+				{#each Object.entries(salles) as [salle, salleInfo]}
+					<SalleCard {salle} {salleInfo} {date}></SalleCard>
+				{/each}
 			</div>
-			{#each Object.entries(salles) as [salle, salleInfo]}
-				<SalleCard
-					{salle}
-					{salleInfo}
-          {date}
-				></SalleCard>
-			{/each}
 		{/each}
 	{/each}
 </div>
-
-<style>
-	p {
-		color: var(--color);
-	}
-
-	.flexgrid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-		gap: 16px;
-	}
-
-	.container {
-		padding: 16px;
-	}
-</style>

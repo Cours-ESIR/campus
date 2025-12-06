@@ -1,33 +1,29 @@
 <script lang="ts">
-    import Icons from "$lib/Icons.svelte"
+	import { Gear, House, Info, MapPin } from "@steeze-ui/phosphor-icons";
+	import { Github } from "@steeze-ui/simple-icons";
+	import { Icon } from "@steeze-ui/svelte-icon";
 </script>
 
-<footer>
-	<a class="iconbtn" href="/"><Icons width="24" name="home"/></a>
-	<a class="iconbtn" href="/map"><Icons width="24" name="map"/></a>
-	<a class="iconbtn" href="/settings"><Icons width="24" name="info"/></a>
-	<a class="iconbtn" target="_blank" href="https://github.com/beaulieu-camp"><Icons width="24" name="github"/></a>
+<footer
+	class="flex items-center justify-center bg-slate-50 dark:bg-slate-950 w-full overflow-hidden gap-2 shadow-2xl"
+>
+	<a class="rounded-full p-2 hover:bg-blue-500 duration-200 m-2 text-center" href="/">
+		<Icon src={House} theme="fill" class="size-6"></Icon>
+	</a>
+	<a class="rounded-full p-2 hover:bg-blue-500 duration-200 m-2 text-center" href="/map">
+		<Icon src={MapPin} theme="fill" class="size-6"></Icon>
+	</a>
+	<a
+		class="rounded-full p-2 hover:bg-blue-500 duration-200 m-2 text-center"
+		href="/settings"
+	>
+		<Icon src={Info} theme="fill" class="size-6"></Icon>
+	</a>
+	<a
+		class="rounded-full p-2 hover:bg-blue-500 duration-200 m-2 text-center"
+		target="_blank"
+		href="https://github.com/cours-esir/campus"
+	>
+		<Icon src={Github} theme="fill" class="size-6"></Icon>
+	</a>
 </footer>
-
-<style>
-	
-	footer {
-		display: flex;
-		justify-content:center;
-		align-items: center;
-
-		background-color: var(--primary);
-		box-shadow: var(--shadow);
-		width: 100%;
-
-		overflow: hidden;
-		gap:8px
-	}
-  
-	a {
-		text-align:center;
-		border-radius: 100%;
-		margin: 8px;
-	}
-
-</style>

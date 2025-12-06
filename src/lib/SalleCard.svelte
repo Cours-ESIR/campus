@@ -1,15 +1,40 @@
 <script lang="ts">
-	import { salleLibres } from "@cours-esir/salles_module";
-	import Icons from "./Icons.svelte";
+	import {
+		salleLibres,
+		type Event as CalEvent,
+	} from "@cours-esir/salles_module";
+	import { Calendar, Timer } from "@steeze-ui/phosphor-icons";
+	import { Icon } from "@steeze-ui/svelte-icon";
 
-	export let salle: String;
-	export let salleInfo;
-    export let date : Date
-    let { until, state, error } = salleLibres(salleInfo.events, date)
+	let {
+		salle,
+		salleInfo,
+		date,
+	}: {
+		salle: String;
+		salleInfo: { id: string; events: CalEvent[] };
+		date: Date;
+	} = $props();
 
-	function stringify_date(date: Date) {
-		if (date == undefined) return "updating";
-		return date.toLocaleString("fr");
+	let { until, state, error } = $derived(salleLibres(salleInfo.events, date));
+
+	function stringify_date(until: Date) {
+		if (until === undefined) return "updating";
+		return until.toLocaleString("fr");
+	}
+
+	function formatTime(time: number) {
+		time = Math.floor(time / 1000 / 60);
+		let minutes = time % 60;
+		let hours = (time - minutes) / 60;
+		return `${hours} heures et ${minutes} minutes`;
+	}
+
+	function stringify_time(until: Date) {
+		if (until === undefined) return "updating";
+
+		let time = Math.abs(date.getTime() - until.getTime());
+		return formatTime(time);
 	}
 </script>
 
@@ -18,78 +43,26 @@
 		<div>
 			<p>🔴 {error}</p>
 			<h3>{salle}</h3>
-
-			<br />
-			<br />
 		</div>
 	{:else}
-		<div>
-			<p>
-				<Icons
-					color={state == "Libre" ? "var(--green)" : "var(--red)"}
-					name="circle"
-					width="16"
-				></Icons>
-				{state}
-			</p>
-			<h3>{salle}</h3>
+		<div
+			class="items-center rounded-xl p-4 flex-wrap gap-4 flex justify-between {state ==
+			'Libre'
+				? 'bg-green-500/30 bg-green-500/50'
+				: 'bg-red-500/30 bg-red-500/50'}"
+		>
+			<h3 class="text-6xl">{salle}</h3>
 
-			<br />
-			<p>
-				<svg
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
-					><path
-						d="M18.6214 2.55029L21.4498 5.37872L20.0356 6.79293L17.2071 3.96451L18.6214 2.55029Z"
-						fill="currentColor"
-					/><path
-						d="M12.8225 8.60055H10.8225V12.6005H12.8225V8.60055Z"
-						fill="currentColor"
-					/><path
-						fill-rule="evenodd"
-						clip-rule="evenodd"
-						d="M5.18633 18.8137C8.70105 22.3285 14.3995 22.3285 17.9143 18.8137C21.429 15.299 21.429 9.60055 17.9143 6.08583C14.3995 2.57111 8.70105 2.57111 5.18633 6.08583C1.67161 9.60054 1.67161 15.299 5.18633 18.8137ZM6.60054 17.3995C9.33422 20.1332 13.7664 20.1332 16.5 17.3995C19.2337 14.6659 19.2337 10.2337 16.5 7.50004C13.7664 4.76637 9.33422 4.76637 6.60054 7.50004C3.86688 10.2337 3.86688 14.6659 6.60054 17.3995Z"
-						fill="currentColor"
-					/></svg
-				>
-				Jusqu'au {stringify_date(until)}
-			</p>
+			<div class="flex flex-col gap-2">
+				<p class="flex gap-2">
+					<Icon theme="bold" class="size-6" src={Calendar}></Icon>
+					{state} jusqu'au {stringify_date(until)}
+				</p>
+				<p class="flex gap-2">
+					<Icon theme="bold" class="size-6" src={Timer}></Icon>
+					{state} pendant {stringify_time(until)}
+				</p>
+			</div>
 		</div>
 	{/if}
 </a>
-
-<style>
-	div {
-		background-color: var(--secondary);
-		padding: 16px;
-		border-radius: 16px;
-		display: flex;
-		flex-direction: column;
-	}
-
-	h3,
-	p {
-		margin: 0;
-	}
-
-	p {
-		font-weight: 200;
-		display: flex;
-		align-items: center;
-		gap: 8px;
-		opacity: 0.7;
-	}
-
-	a[href] {
-		all: unset;
-		cursor: pointer;
-		user-select: none;
-		-webkit-user-drag: none;
-		color: var(--text);
-		/* max-width: 300px; */
-		/* flex: 300px 1; */
-	}
-</style>

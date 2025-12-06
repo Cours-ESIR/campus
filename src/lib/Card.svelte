@@ -1,39 +1,12 @@
 <script lang="ts">
-
-    export let title:String
-
+	let { title }: { title: string } = $props();
 </script>
 
-
-
-<div class="card">
-    
-    <h3>
-        {title}
-    </h3>
-    <p><slot></slot></p>
+<div class="flex flex-col rounded-2xl p-4 bg-slate-100 dark:bg-slate-900">
+	<h3>
+		{title}
+	</h3>
+	<div class="flex items-center gap-2 opacity-70 font-extralight">
+		<slot></slot>
+	</div>
 </div>
-
-<style>
-
-div{
-    background-color: var(--secondary);
-    padding:16px;
-    border-radius: 16px ;
-    display: flex;
-    flex-direction: column;
-}
-
-h3,p{
-    margin:0;
-}
-
-p{
-    font-weight: 200;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    opacity: 0.7;
-}
-
-</style>

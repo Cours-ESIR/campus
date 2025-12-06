@@ -1,12 +1,10 @@
-<script lang="ts" setup>
+<script lang="ts">
+	import Header from "$lib/Header.svelte";
 	import type { Event } from "@cours-esir/salles_module";
-	import { onMount } from "svelte";
-
 	let jours = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"];
-	let code = "";
 
 	let { data } = $props();
-	let { planning } = data;
+	let { planning }: { planning: { events: Event[]; id: string } } = data;
 
 	let days: { [day: string]: Event[] } = {};
 
@@ -25,123 +23,67 @@
 	function get_time(date: Date): number {
 		return date.getHours() + date.getMinutes() / 60;
 	}
+
+	function calcTop(event: Event) {
+		let calc = 20 + 40 * (get_time(event.start.date) - hours[0]);
+		return `${calc}px`;
+	}
+
+	function calcHeight(event: Event) {
+		let calc =
+			40 * (get_time(event.end!.date) - get_time(event.start.date));
+		return `${calc}px`;
+	}
 </script>
 
-<h1>{code.replaceAll("_", " ")}</h1>
+<div class="p-4 items-center flex flex-col gap-8 h-full *:w-full *:max-w-xl">
+	<Header>{JSON.parse(atob(planning.id)).join(" - ")}</Header>
 
-<div-planning>
-	<rowbody>
-		{#each Object.entries(days).toSorted() as [day, events]}
-			<column class="events-list">
-				<titre>{day}</titre>
-				{#each events as event}
-					<div
-						style="top:calc( 66px + 50px * {get_time(
-							event.start.date,
-						) - hours[0]});height: calc( 50px * {get_time(
-							event.end.date,
-						) - get_time(event.start.date)})"
-					>
-						{event.description}
-					</div>
-				{/each}
-			</column>
-		{/each}
-	</rowbody>
-	<row-legend>
-		{#each hours as y}
-			<div
-				class="lines"
-				style="left:70px; top:calc( 50px * {y - hours[0]})"
-			>
-				<span class="text">{y % 24}h00</span>
-				<span class="line"></span>
-			</div>
-		{/each}
-	</row-legend>
-</div-planning>
-
-<style>
-	h1 {
-		text-align: center;
-	}
-
-	div-planning {
-		padding-left: 70px !important;
-		max-width: 1000px;
-		width: cacl(100% - 70px);
-		display: grid;
-		position: relative;
-		margin: auto;
-
-		grid-template-columns: 1fr;
-	}
-
-	div-planning > * {
-		--days: 5;
-		width: 100%;
-		height: auto;
-		display: grid;
-		grid-auto-flow: column;
-		grid-template-columns: repeat(5, 200px);
-	}
-
-	titre {
-		/* margin: 20px 5px;
-        width: calc(100% - 10px); */
-		padding: 16px;
-		text-align: center;
-		display: block;
-		font-size: 1.2em;
-	}
-
-	div-planning > row-legend {
-		position: absolute;
-		height: calc(50px * var(--hours));
-		top: 66px;
-		z-index: -1;
-	}
-
-	div-planning > row-legend > .lines {
-		position: absolute;
-		right: 0;
-		width: 100%;
-	}
-
-	div-planning > row-legend > .lines > .text {
-		transform: translate(-150%, -50%);
-		position: absolute;
-	}
-	div-planning > row-legend > .lines > .line {
-		border-top: 1px solid var(--text);
-		top: 0;
-		display: block;
-		width: calc(100% - 70px);
-	}
-
-	rowbody {
-		width: 100%;
-		overflow-x: auto;
-		height: 900px;
-	}
-
-	column > * {
-		/* text-overflow: '..'; */
-		overflow: hidden;
-	}
-
-	.events-list {
-		position: relative;
-		height: calc(50px * var(--hours));
-	}
-	.events-list > div {
-		--decalage: 0.1em;
-		border-radius: 0.6em;
-		margin: 0 var(--decalage);
-		width: calc(100% - var(--decalage) * 2 - 16px);
-		position: absolute;
-		left: 0;
-		background: var(--blue);
-		padding: 0 8px;
-	}
-</style>
+	<div
+		class="overflow-auto flex-1 relative dark:bg-slate-900 bg-slate-100 rounded-2xl"
+	>
+		<table class="relative min-w-full">
+			<thead class="sticky top-0 dark:bg-slate-900 bg-slate-100 z-2">
+				<tr>
+					<th></th>
+					{#each Object.keys(days).toSorted() as day}
+						<th class="p-4 text-center text-xl">
+							{day}
+						</th>
+					{/each}
+				</tr>
+			</thead>
+			<tbody class="h-full w-full relative">
+				<tr class="w-full h-full">
+					<td class="sticky left-0 dark:bg-slate-900 bg-slate-100 z-1 text-right">
+						{#each hours as y}
+							<div class="relative py-2">
+								<span class="dark:bg-slate-900 bg-slate-100 px-2 z-1">
+									{y % 24}h00
+								</span>
+								<span
+									class="absolute top-1/2 block left-8 opacity-5 -z-1 border border-top w-screen"
+								>
+								</span>
+							</div>
+						{/each}
+					</td>
+					{#each Object.values(days).toSorted() as events}
+						<td class="relative w-full">
+							{#each events as event}
+								<div
+									style="height: {calcHeight( event )}; top: {calcTop( event )}"
+									class=" absolute overflow-hidden rounded-2xl z-0 bg-blue-500 inset-x-1"
+								>
+									<div class="p-2 w-full h-full">
+										{event.description}
+									</div>
+								</div>
+							{/each}
+						</td>
+					{/each}
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

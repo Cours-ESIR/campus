@@ -4,6 +4,7 @@
 	"scripts": {
 		"dev": "vite dev  --host",
 		"build": "vite build",
+		"deploy": "vc --prod",
 		"preview": "vite preview",
 		"test": "vite preview --port 80",
 		"prod": "vite build && vite preview --port 80 --host",
@@ -14,14 +15,16 @@
 		"@sveltejs/adapter-vercel": "^6.2.0",
 		"@sveltejs/kit": "^2.49.1",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
-		"svelte": "^5.45.5"
-	},
-	"type": "module",
-	"dependencies": {
+		"svelte": "^5.45.6",
 		"@cours-esir/salles_module": "3.0.2",
-		"hammerjs": "^2.0.8",
 		"maplibre-gl": "^5.14.0",
 		"vercel": "^49.1.1",
+		"@tailwindcss/vite": "^4.1.17",
+		"tailwindcss": "^4.1.17",
+		"@steeze-ui/phosphor-icons": "^2.1.1",
+		"@steeze-ui/simple-icons": "^1.10.1",
+		"@steeze-ui/svelte-icon": "^1.6.2",
 		"vite": "^7.2.6"
-	}
+	},
+	"type": "module"
 }

@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 @font-face {
     font-family: 'Dosis';
     src: url("/fonts/Dosis.ttf");
@@ -7,126 +9,18 @@
     font-family: 'Dosis';
 }
 
-:root {
-    --green:    hsl(150, 70%, 30%);
-    --red:      hsl(360, 85%, 45%);
-    --blue:     hsl(220, 80%, 65%);
-    --orange:   hsl(35, 100%, 65%);
-    --yellow:   hsl(50, 100%, 50%);
-    --lightblue:hsl(180, 70%, 70%);
-    --purple:   hsl(275, 60%, 60%);
-  
-    --text:         black;
-    --primary:   hsl(60, 17%, 98%);
-    --secondary:    rgb(245, 245, 245);
-    --accent:       hsl(210, 78%, 60%);
-    --accent-hover: hsl(210, 78%, 50%);
-
-    --shadow: 5px 5px 10px -10px hsl(210, 78%, 2%); ;
-    
-}
-
-@media (prefers-color-scheme: dark){
-    :root	{
-        
-        --green:    hsl(150, 70%, 50%);
-        --red:      hsl(360, 85%, 65%);
-        
-        --text:       hsl(0, 0%, 100%);
-        --primary: hsl(0, 0%, 4%);
-        --secondary:  rgb(40, 40, 40);
-
-        --accent:     hsl(210, 78%, 50%);
-        --accent-hover: hsl(210, 78%, 40%);
-
-	}
-}
-
-header {
-    font-size:40px;
-    color:var(--text);
-    text-align:center;
-    margin:16px;
-}
-
-.mapboxgl-ctrl button:not(:disabled):hover {
-    background-color:var(--accent-hover) !important;
-}
-
 html {
     font-family: 'Dosis' ;
-    background-color: var(--primary);
-    color: var(--text);
-    font-size: 16;
-    scroll-behavior: smooth;
-}
-
-body {
-    margin : 0;
+    @apply scroll-smooth bg-slate-50 dark:bg-slate-950 text-slate-950 dark:text-slate-50;
 }
 
 .mapboxgl-map {
     font-family: 'Dosis' !important;
 }
 
-a:hover , button:hover, a:focus, button:focus{
-    outline: unset;
-    border: unset;
-}
-
-/* a[href] {
-    cursor: pointer;
-    transition: 0.25s ease-out;
-}
-
-
-
-a:visited,a[href] {
-    color:unset;
-    text-decoration: unset;
-} */
-
-button {
-    background-color: var(--accent);
-    border: unset;
-    border-radius: 16px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    color : var(--primary);
-    font-family: 'Dosis';
-    transition: 0.25s ease-out;
-    cursor: pointer;
-}
-
-button:hover, button:focus {
-    background-color: var(--accent-hover);
-}
-
-
-.iconbtn {
-    padding:12px;
-    background-color: unset;
-    display: inline-block;
-    line-height: 0;
-}
-
-.iconbtn , .iconbtn > svg{
-    transition : 0.25s ease-out;
-}
-
-.iconbtn:hover,.iconbtn:focus{
-    background-color: var(--accent-hover);
-}
-
-
-
 .search{
-    font-size: 1rem;
-    color: var(--primary);
-    text-align: left;
     width: clamp(1px,100%,640px);
-    background-color: var(--accent);
-    border-radius: 16px;   
+    @apply bg-blue-500 rounded-2xl text-left text-lg
 }
 
 .search > div:nth-child(1){
@@ -144,10 +38,6 @@ input.searchbar  {
     width: inherit;
     font-size: 16px;
     height: 20px;
-}
-
-input.searchbar ~ svg {
-    color: var(--primary);
 }
 
 .search > div:nth-child(2){
