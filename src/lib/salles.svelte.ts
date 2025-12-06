@@ -14,12 +14,12 @@ class Salles {
 
     static update = new Date(0)
 
-    static data: dataType = {}
+    static dataEvents: dataType = {}
 
     static setDataFromPath(p1: string, p2: string, p3: string, n: { events: Event[], id: string }) {
-        if (Salles.data[p1] === undefined) { Salles.data[p1] = {} }
-        if (Salles.data[p1][p2] === undefined) { Salles.data[p1][p2] = {} }
-        Salles.data[p1][p2][p3] = n
+        if (Salles.dataEvents[p1] === undefined) { Salles.dataEvents[p1] = {} }
+        if (Salles.dataEvents[p1][p2] === undefined) { Salles.dataEvents[p1][p2] = {} }
+        Salles.dataEvents[p1][p2][p3] = n
     }
 
     async getCal() {
@@ -58,7 +58,7 @@ class Salles {
                 console.error("Could not load", atob(el.id))
             })
         }
-        return Salles.data
+        return Salles.dataEvents
     }
 
     async getByKey(key: string): Promise<{ events: Event[]; id: string; }> {
