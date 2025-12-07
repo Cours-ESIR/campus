@@ -35,5 +35,8 @@
 		"markdown-it": "^14.1.0",
 		"vite": "^7.2.6"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"katex": "^0.16.27"
+	}
 }

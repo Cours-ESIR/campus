@@ -4,6 +4,9 @@
   "workspaces": {
     "": {
       "name": "univ",
+      "dependencies": {
+        "katex": "^0.16.27",
+      },
       "devDependencies": {
         "@cours-esir/salles_module": "3.0.8",
         "@steeze-ui/phosphor-icons": "^2.1.1",
@@ -673,7 +676,7 @@
 
     "jsonfile": ["jsonfile@6.2.0", "", { "dependencies": { "universalify": "^2.0.0" }, "optionalDependencies": { "graceful-fs": "^4.1.6" } }, "sha512-FGuPw30AdOIUTRMC2OMRtQV+jkVj2cfPqSeWXv1NEAJ1qZ5zb1X6z1mFhbfOB/iy3ssJCD+3KuZ8r8C3uVFlAg=="],
 
-    "katex": ["katex@0.16.26", "", { "dependencies": { "commander": "^8.3.0" }, "bin": { "katex": "cli.js" } }, "sha512-LvYwQDwfcFB3rCkxwzqVFxhIB21x1JivrWAs3HT9NsmtgvQrcVCZ6xihnNwXwiQ8UhqRtDJRmwrRz5EgzQ2DuA=="],
+    "katex": ["katex@0.16.27", "", { "dependencies": { "commander": "^8.3.0" }, "bin": { "katex": "cli.js" } }, "sha512-aeQoDkuRWSqQN6nSvVCEFvfXdqo1OQiCmmW1kc9xSdjutPv7BGO7pqY9sQRJpMOGrEdfDgF2TfRXe5eUAD2Waw=="],
 
     "kdbush": ["kdbush@4.0.2", "", {}, "sha512-WbCVYJ27Sz8zi9Q7Q0xHC+05iwkm3Znipc2XTlrnJbsHMYktW4hPhXUE8Ys1engBrvffoSCqbil1JQAa7clRpA=="],
 
@@ -1074,6 +1077,8 @@
     "@vercel/redwood/semver": ["semver@6.3.1", "", { "bin": { "semver": "bin/semver.js" } }, "sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA=="],
 
     "@vercel/remix-builder/path-to-regexp": ["path-to-regexp@6.1.0", "", {}, "sha512-h9DqehX3zZZDCEm+xbfU0ZmwCGFCAAraPJWMXJ4+v32NjZJilVg3k1TcKsRgIb8IQ/izZSaydDc1OhJCZvs2Dw=="],
+
+    "@vscode/markdown-it-katex/katex": ["katex@0.16.26", "", { "dependencies": { "commander": "^8.3.0" }, "bin": { "katex": "cli.js" } }, "sha512-LvYwQDwfcFB3rCkxwzqVFxhIB21x1JivrWAs3HT9NsmtgvQrcVCZ6xihnNwXwiQ8UhqRtDJRmwrRz5EgzQ2DuA=="],
 
     "edge-runtime/async-listen": ["async-listen@3.0.1", "", {}, "sha512-cWMaNwUJnf37C/S5TfCkk/15MwbPRwVYALA2jtjkbHjCmAPiDXyNJy2q3p1KAZzDLHAWyarUWSujUoHR4pEgrA=="],
 

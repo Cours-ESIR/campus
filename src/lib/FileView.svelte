@@ -3,6 +3,7 @@
 	import hljs from "highlight.js";
 	import mdhljs from "markdown-it-highlightjs";
 	import mk from "@vscode/markdown-it-katex";
+	import "katex/dist/katex.css";
 
 	const markdownit = md({ html: true })
 		.use(mdhljs, {
@@ -124,6 +125,7 @@
 	}
 
 	#cours :global(pre) {
-		@apply bg-slate-100 dark:bg-slate-900 overflow-auto rounded-2xl p-2;
+		@apply bg-slate-100 dark:bg-slate-900 overflow-auto rounded-2xl p-4;
 	}
+
 </style>
