@@ -14,7 +14,7 @@
 			inline: false,
 			hljs,
 		})
-		.use(mk.default, {
+		.use(mk.default || mk, {
 			displayMode: true,
 			throwOnError: true,
 			macros: {
