@@ -51,8 +51,8 @@
 		});
 
 	let { buffer } = $props();
-
-	const content = markdownit.render(buffer.toString());
+	let str = buffer.toString() // mandatory to set in a separate variable because when bundled it doesn't work
+	const content = markdownit.render(str);
 </script>
 
 <div id="cours" class="flex flex-col gap-4">
