@@ -21,17 +21,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - uses: oven-sh/setup-bun@main
+      - uses: actions/setup-node@v4
         with:
-          registries: |
-            https://registry.npmjs.org/
-            @myorg:https://npm.pkg.github.com/|$GITHUB_TOKEN
-
+          registry-url: 'https://npm.pkg.github.com/'
       - name: Install dependencies
         env:
-          BUN_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: bun ci
-
+          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm ci
+        
+      - uses: oven-sh/setup-bun@v2
       - run: bun run build
         env:
           nodeenv: true
