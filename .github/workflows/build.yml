@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         env:
           NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm ci
+        run: npm i
         
       - uses: oven-sh/setup-bun@v2
       - run: bun run build
