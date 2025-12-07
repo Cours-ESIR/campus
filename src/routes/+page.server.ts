@@ -1,9 +1,9 @@
 export const prerender = false
 export const ssr = true
 
-import { salles } from "$lib/salles.svelte";
+import { Salles } from "$lib/salles.svelte";
 
 export const load = async () => {
-    let retour = await salles.getCal()
+    let retour = await Salles.getCal()
     return { retour }
 }

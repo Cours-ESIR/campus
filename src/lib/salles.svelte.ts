@@ -10,7 +10,7 @@ function getMonday(d: Date) {
 
 type dataType = { [university: string]: { [building: string]: { [room: string]: { events: Event[], id: string } } } }
 
-class Salles {
+export class Salles {
 
     static update = new Date(0)
 
@@ -22,7 +22,7 @@ class Salles {
         Salles.dataEvents[p1][p2][p3] = n
     }
 
-    async getCal() {
+    static async getCal() {
         let date = new Date()
 
         if (date.getTime() - Salles.update.getTime() > 1000 * 60 * 60 * 3) {
@@ -61,11 +61,9 @@ class Salles {
         return Salles.dataEvents
     }
 
-    async getByKey(key: string): Promise<{ events: Event[]; id: string; }> {
-        let cal = await this.getCal()
+    static async getByKey(key: string): Promise<{ events: Event[]; id: string; }> {
+        let cal = await Salles.getCal()
         let path = JSON.parse(atob(key))
         return cal[path[0]][path[1]][path[2]]
     }
 }
-
-export let salles = new Salles()
