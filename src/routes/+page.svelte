@@ -1,7 +1,6 @@
 <script lang="ts">
 	import BatimentCard from "$lib/BatimentCard.svelte";
 	import Header from "$lib/Header.svelte";
-	import SalleCard from "$lib/SalleCard.svelte";
 	let { data } = $props();
 	let date = $state(new Date());
 

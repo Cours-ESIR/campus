@@ -5,7 +5,7 @@
     "": {
       "name": "univ",
       "devDependencies": {
-        "@cours-esir/salles_module": "3.0.4",
+        "@cours-esir/salles_module": "3.0.8",
         "@steeze-ui/phosphor-icons": "^2.1.1",
         "@steeze-ui/simple-icons": "^1.10.1",
         "@steeze-ui/svelte-icon": "^1.6.2",
@@ -25,7 +25,7 @@
     },
   },
   "packages": {
-    "@cours-esir/salles_module": ["@cours-esir/salles_module@3.0.4", "https://npm.pkg.github.com/download/@cours-esir/salles_module/3.0.4/f5131488ffc57c28e49180c300237454d2261b30", { "dependencies": { "express": "^5.2.1", "ts-ics": "^2.4.0", "typescript": "^5.9.3" } }, "sha512-DKXmRoRW6d6zaVSwATx1tXXeVAG/JYkuf2gBIhkD+V2EAR2ZwfiN27NuWtN4dRrfiKAn2gm+w7OgwXaeYRYDHA=="],
+    "@cours-esir/salles_module": ["@cours-esir/salles_module@3.0.8", "https://npm.pkg.github.com/download/@cours-esir/salles_module/3.0.8/aca937f460d85f6fe904008af4e1594aae69509a", { "dependencies": { "express": "^5.2.1", "ts-ics": "^2.4.0", "typescript": "^5.9.3" } }, "sha512-D7QAAgEw44DRifBqpTqKa7kxXpYhS6Ft9Une8e0J1LRlqNTZBBdqAJuqvcPB9Jr9/Y8bGo66IctCFMC5cWrf5w=="],
 
     "@cspotcode/source-map-support": ["@cspotcode/source-map-support@0.8.1", "", { "dependencies": { "@jridgewell/trace-mapping": "0.3.9" } }, "sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw=="],
 

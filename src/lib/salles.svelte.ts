@@ -1,4 +1,4 @@
-import { data, sallesEvents, type Event } from "@cours-esir/salles_module"
+import { universities, sallesEvents, type Event } from "@cours-esir/salles_module"
 import { PromisePool } from '@supercharge/promise-pool'
 
 function getMonday(d: Date) {
@@ -31,13 +31,13 @@ class Salles {
             let dateE = new Date()
             dateE.setDate(dateS.getDate() + 14)
 
-            let promises: { id: string, rootURL: string, resourceId: string, projectId: string }[] = []
+            let promises: { id: string, rootUrl: string, resourceId: string, projectId: string }[] = []
 
-            for (let university of data) {
+            for (let university of universities) {
                 for (let building of university.buildings) {
                     for (let room of building.rooms) {
                         let id = btoa(JSON.stringify([university.name, building.name, room.name]))
-                        promises.push({ id, rootURL: university.rootURL, resourceId: room.resourceId, projectId: room.projectId })
+                        promises.push({ id, rootUrl: university.rootUrl, resourceId: room.resourceId, projectId: room.projectId })
                     }
                 }
             }
@@ -45,7 +45,7 @@ class Salles {
             await PromisePool.withConcurrency(10).for(promises).process(async el => {
                 for (let i = 0; i < 5; i++) {
                     try {
-                        let events = await sallesEvents(el.rootURL, [el.resourceId], el.projectId, dateS, dateE)
+                        let events = await sallesEvents(el.rootUrl, [el.resourceId], el.projectId, dateS, dateE)
                         let path = JSON.parse(atob(el.id))
                         Salles.setDataFromPath(path[0], path[1], path[2], {
                             events, id: el.id

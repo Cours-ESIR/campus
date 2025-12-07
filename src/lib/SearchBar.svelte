@@ -2,21 +2,23 @@
 	import { MagnifyingGlass } from "@steeze-ui/phosphor-icons";
 	import { Icon } from "@steeze-ui/svelte-icon";
 
-	let { map, geojson } = $props();
+	let { map, layers } = $props();
 
-	let layers = [];
+	let layers2 = [];
 
-	for (let item of geojson.features) {
-		layers.push({
-			name: item.properties["name"],
-			bounds: item.bounds,
-		});
+	for (let layer of layers) {
+		for (let item of layer.features) {
+			layers2.push({
+				name: item.properties.name,
+				bounds: item.properties.bounds,
+			});
+		}
 	}
 
 	let searchvalue = $state("");
 
 	let filtered = $derived(
-		layers
+		layers2
 			.filter((layer) => {
 				let str1 = denoise(layer.name);
 				let str2 = denoise(searchvalue);
