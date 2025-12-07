@@ -8,12 +8,21 @@
 
 <div class="p-4 items-center flex flex-col gap-8 h-full *:w-full *:max-w-xl">
 	<Header>Listes des cours</Header>
-	<p>
+	<div>
 		Cette page est en Bêta.
+		<br>
 		<a href="https://github.com/Cours-ESIR/Cours/">
 			Pour modifier des cours ou en ajouter, cliquer ici.
 		</a>
-	</p>
+		<br>
+		
+		À terme : 
+		<ul class="list-disc">
+			<li> je ne souterais plus avoir des cours en fonction des années d'étude, mais en fonction de thèmes </li>
+			<li> je souhaites que tout le contenu soit original (pas d'anales par exemple) </li>
+			<li> je voudrais ajouter des intégrations, par exemple draw.io ou typst </li>
+		</ul>
+	</div>
 	{#each Object.entries(cours) as [id, { name, buffer }]}
 		<a href="/cours/{id}">
 			<Card title={name}></Card>
