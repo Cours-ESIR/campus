@@ -4,9 +4,7 @@
 	import mdhljs from "markdown-it-highlightjs";
 	import mk from "@vscode/markdown-it-katex";
 
-	const markdownit = md({
-		html: true,
-	})
+	const markdownit = md({ html: true })
 		.use(mdhljs, {
 			auto: true,
 			ignoreIllegals: true,
@@ -51,7 +49,7 @@
 		});
 
 	let { buffer } = $props();
-	let str = buffer.toString() // mandatory to set in a separate variable because when bundled it doesn't work
+	let str = buffer.toString(); // mandatory to set in a separate variable because when bundled it doesn't work
 	const content = markdownit.render(str);
 </script>
 
@@ -64,6 +62,11 @@
 
 	#cours :global(.hljs .hljs-keyword) {
 		@apply text-red-500;
+	}
+
+	#cours :global(td),
+	#cours :global(th) {
+		@apply border p-2;
 	}
 
 	#cours :global(.hljs .hljs-title) {
@@ -117,7 +120,7 @@
 	}
 
 	#cours :global(blockquote) {
-		@apply border-l-8 border-yellow-500 rounded-r-2xl text-yellow-500 bg-yellow-100 p-4;
+		@apply border-l-8 border-yellow-500 rounded-r-2xl text-yellow-500 bg-yellow-500/20 p-4;
 	}
 
 	#cours :global(pre) {
