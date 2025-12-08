@@ -68,7 +68,7 @@
 							</div>
 						{/each}
 					</td>
-					{#each Object.values(days).toSorted() as events}
+					{#each Object.entries(days).toSorted() as [key,events]}
 						<td class="relative w-full">
 							{#each events as event}
 								<div
